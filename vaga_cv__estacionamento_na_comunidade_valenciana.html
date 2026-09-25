@@ -4,76 +4,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#123d36">
-  <title>Vaga CV — Estacionamento na Comunidade Valenciana</title>
+
+<title>Vaga CV — Estacionamento colaborativo</title>
 
 <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   >
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <style>
     :root {
       color-scheme: light;
       --green: #123d36;
       --accent: #d7ef87;
-      --bg: #f5f7f3;
-      --muted: #61706a;
+      --background: #f5f7f3;
       --border: #dce4de;
+      --muted: #61706a;
     }
 
-* { box-sizing: border-box; }
+* {
+      box-sizing: border-box;
+    }
 
 body {
       margin: 0;
-      font-family: system-ui, sans-serif;
-      background: var(--bg);
       color: #172d26;
-    }
-
-button, select, a { -webkit-tap-highlight-color: transparent; }
-
-button, select {
-      font: inherit;
-      border-radius: 12px;
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-    }
-
-button {
-      cursor: pointer;
-      background: white;
-      color: var(--green);
-      font-weight: 650;
-    }
-
-button:hover { filter: brightness(.96); }
-    button:disabled { opacity: .55; cursor: wait; }
-
-button:focus-visible, select:focus-visible, a:focus-visible {
-      outline: 3px solid #4186e4;
-      outline-offset: 3px;
+      background: var(--background);
+      font-family: system-ui, sans-serif;
     }
 
 header {
-      background: var(--green);
-      color: white;
-      padding: 20px 26px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 16px;
+      padding: 18px 24px;
+      background: var(--green);
+      color: white;
     }
 
-.brand { font-size: 25px; font-weight: 850; letter-spacing: -.8px; }
-    .brand span { color: var(--accent); }
-    .tagline { font-size: 12px; opacity: .8; margin-top: 4px; }
-    .region { font-size: 13px; text-align: right; }
+.brand {
+      font-size: 27px;
+      font-weight: 850;
+    }
+
+.brand span {
+      color: var(--accent);
+    }
+
+.region {
+      font-size: 12px;
+      text-align: right;
+    }
 
 main {
       display: grid;
-      grid-template-columns: 370px minmax(0, 1fr);
-      height: calc(100dvh - 88px);
+      grid-template-columns: 380px minmax(0, 1fr);
+      height: calc(100dvh - 72px);
       min-height: 600px;
     }
 
@@ -83,140 +70,242 @@ aside {
       border-right: 1px solid var(--border);
     }
 
-h1 { font-size: 27px; line-height: 1.12; margin: 0 0 12px; }
-    p { line-height: 1.5; }
-    .muted { color: var(--muted); font-size: 13px; }
-    .toolbar { display: grid; gap: 10px; margin: 18px 0; }
-    .primary { background: var(--green); color: white; border: 0; }
-    .accent { background: var(--accent); border: 0; }
-    .row { display: flex; gap: 8px; }
-    .row > * { flex: 1; min-width: 0; }
+h1 {
+      margin: 0 0 12px;
+      font-size: 27px;
+      line-height: 1.15;
+    }
 
-.notice {
-      border: 1px solid #e6d49c;
-      background: #fff9e8;
-      border-radius: 12px;
-      padding: 12px;
-      font-size: 12px;
+h2 {
+      margin-top: 26px;
+      font-size: 18px;
+    }
+
+p {
       line-height: 1.5;
     }
 
-#status {
-      margin: 14px 0;
+.muted,
+    .status {
       font-size: 13px;
+      color: var(--muted);
       line-height: 1.5;
-      min-height: 40px;
     }
 
-#gpsInfo { font-size: 12px; color: var(--muted); margin: 8px 0; }
+.toolbar {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0;
+    }
 
-.section-title {
+.row {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 22px;
       gap: 8px;
     }
 
-.section-title h2 { font-size: 16px; }
+.row > * {
+      flex: 1;
+      min-width: 0;
+    }
 
-#count {
+button,
+    select {
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font: inherit;
+      background: white;
+      color: var(--green);
+    }
+
+button {
+      cursor: pointer;
+      font-weight: 650;
+    }
+
+button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+button:focus-visible,
+    select:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #4186e4;
+      outline-offset: 3px;
+    }
+
+.primary {
+      background: var(--green);
+      color: white;
+    }
+
+.accent {
+      background: var(--accent);
+    }
+
+.notice {
+      padding: 12px;
+      border: 1px solid #e6d49c;
+      border-radius: 12px;
+      background: #fff9e8;
       font-size: 12px;
-      background: #e4eadf;
-      padding: 4px 9px;
-      border-radius: 20px;
+      line-height: 1.5;
     }
 
 .card {
-      padding: 15px;
+      margin: 10px 0;
+      padding: 14px;
       border: 1px solid var(--border);
+      border-radius: 12px;
       background: white;
-      border-radius: 15px;
-      margin-bottom: 10px;
     }
 
-.card h3 { font-size: 15px; margin: 9px 0; }
-    .card p { font-size: 12px; margin: 7px 0; color: var(--muted); }
+.card h3 {
+      margin: 7px 0;
+      font-size: 15px;
+    }
+
+.card p {
+      margin: 7px 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
 
 .badge {
       display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
       padding: 4px 8px;
       border-radius: 20px;
       background: #edf0f4;
-      color: #445467;
+      font-size: 11px;
+      font-weight: 700;
     }
 
-.badge.local { background: #e7f5cc; color: #36521c; }
+.actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
 
-.card-actions { display: flex; gap: 12px; align-items: center; margin-top: 12px; }
-    .card-actions button { padding: 7px 10px; font-size: 12px; }
+.actions button,
+    .actions a {
+      font-size: 12px;
+    }
 
-a { color: var(--green); font-weight: 650; font-size: 12px; }
+.actions button {
+      padding: 8px;
+    }
 
-.map-wrap { position: relative; min-height: 420px; }
-    #map { width: 100%; height: 100%; }
+a {
+      color: var(--green);
+    }
 
-.map-label {
+.map-wrap {
+      position: relative;
+      min-height: 420px;
+    }
+
+#map {
+      width: 100%;
+      height: 100%;
+    }
+
+.map-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 500;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #172d26;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      background: #ffffff70;
+    }
+
+.map-center::after {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #172d26;
+    }
+
+.legend {
       position: absolute;
       bottom: 30px;
       left: 12px;
       z-index: 500;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 3px 20px #0002;
-      padding: 10px 13px;
-      font-size: 12px;
       max-width: calc(100% - 24px);
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: white;
+      box-shadow: 0 3px 18px #0002;
+      font-size: 11px;
       pointer-events: none;
     }
 
-.empty {
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--muted);
-      padding: 16px 0;
-    }
-
 footer {
-      margin-top: 20px;
+      margin-top: 24px;
       font-size: 11px;
       color: var(--muted);
       line-height: 1.6;
     }
 
 @media (max-width: 760px) {
-      header { padding: 15px 18px; }
-      .region { font-size: 11px; }
-      main { display: flex; flex-direction: column; height: auto; }
-      .map-wrap { order: -1; height: 43dvh; min-height: 300px; }
-      aside { overflow: visible; border: 0; padding: 20px; }
-      h1 { font-size: 24px; }
+      main {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+      }
+
+.map-wrap {
+        order: -1;
+        height: 45dvh;
+        min-height: 320px;
+      }
+
+aside {
+        overflow: visible;
+        border: 0;
+      }
     }
   </style>
 </head>
 
 <body>
   <header>
-    <div>
-      <div class="brand">vaga<span>CV</span></div>
-      <div class="tagline">Menos voltas. Mais informação.</div>
+    <div class="brand">vaga<span>CV</span></div>
+    <div class="region">
+      Estacionamento colaborativo<br>
+      Comunitat Valenciana · Espanha
     </div>
-    <div class="region">Espanha<br>Comunitat Valenciana</div>
   </header>
 
 <main>
     <aside>
-      <h1>Encontre onde<br>estacionar na rua.</h1>
-      <p class="muted">
-        Explore a área desejada e consulte locais mapeados.
-        Confirme sempre a sinalização no local.
+      <h1>Encontre onde estacionar na rua.</h1>
+
+<p class="muted">
+        Explore locais mapeados e consulte relatos da comunidade.
       </p>
 
+<div class="notice">
+        <strong>Informação não é garantia de disponibilidade.</strong>
+        Relatos podem estar incorretos ou desatualizados.
+        Confira a sinalização e não opere o aplicativo ao dirigir.
+      </div>
+
 <div class="toolbar">
-        <label for="city" class="muted">Ir para uma cidade</label>
-        <select id="city">
+        <label for="city">Escolha uma cidade</label>
+
+<select id="city">
           <option value="valencia">València</option>
           <option value="alicante">Alicante / Alacant</option>
           <option value="castellon">Castelló de la Plana</option>
@@ -225,62 +314,101 @@ footer {
         </select>
 
 <div class="row">
-          <button id="gps" class="primary">Ativar meu GPS</button>
-          <button id="stopGps" disabled>Parar GPS</button>
+          <button id="gpsStart" class="primary">Ativar GPS</button>
+          <button id="gpsStop" disabled>Parar GPS</button>
         </div>
 
-<button id="search" class="accent">Buscar nesta área · 1,5 km</button>
-        <button id="report">Marcar vaga livre observada</button>
+<button id="search" class="accent">
+          Buscar estacionamentos · 1,5 km
+        </button>
       </div>
 
-<div class="notice">
-        <strong>Local mapeado não significa vaga livre.</strong>
-        A consulta mostra registros de estacionamento na rua, não ocupação
-        ao vivo. Observações pessoais são locais e expiram em 5 minutos.
-      </div>
+<p id="gpsStatus" class="status" role="status">
+        GPS desligado.
+      </p>
 
-<div id="gpsInfo">GPS desligado.</div>
-      <div id="status" role="status" aria-live="polite">
-        Mova o mapa ou escolha uma cidade e toque em “Buscar nesta área”.
-      </div>
+<section aria-labelledby="communityTitle">
+        <h2 id="communityTitle">Vagas da comunidade</h2>
 
-<div class="section-title">
-        <h2>Locais e observações</h2>
-        <span id="count">0</span>
-      </div>
+<p class="muted">
+          Já estacionou? Use um ponto existente ou alinhe o
+          centro do mapa com a vaga para cadastrá-la.
+        </p>
 
-<div id="results"></div>
+<button id="registerSpace" class="primary" disabled>
+          Estacionei — cadastrar no centro
+        </button>
+
+<p
+          id="communityStatus"
+          class="status"
+          role="status"
+          aria-live="polite"
+        >
+          Iniciando conexão…
+        </p>
+
+<p id="reportStatus" class="status" role="status"></p>
+
+<div id="communityResults"></div>
+      </section>
+
+<section aria-labelledby="mappedTitle">
+        <h2 id="mappedTitle">Estacionamentos mapeados</h2>
+
+<p id="mapStatus" class="status" role="status">
+          Clique em “Buscar estacionamentos” para consultar a área.
+        </p>
+
+<div id="mappedResults"></div>
+      </section>
 
 <footer>
-        O GPS só é solicitado ao ativá-lo. Sua trajetória não é armazenada.
-        Observações são salvas neste navegador, com coordenadas e horário.
-        O mapa usa servidores do OpenStreetMap; a consulta envia a área
-        pesquisada ao Overpass. Rotas abrem um serviço externo.
+        O GPS só é ativado com sua autorização. O app não grava
+        sua trajetória. Pontos cadastrados e ações de ocupação/saída
+        são enviados ao Supabase.
         <br><br>
-        Não opere o app enquanto dirige.
+        O mapa usa OpenStreetMap. A área de busca é enviada ao
+        Overpass. Rotas abrem o Google Maps.
+        <br><br>
+        A identidade é mantida neste navegador. Limpar seus dados
+        ou trocar de aparelho pode impedir o registro da saída.
+        <br><br>
+        Este protótipo não substitui sinalização, regras municipais
+        nem uma política de privacidade completa.
       </footer>
-
-<button id="clear" style="margin-top:12px;font-size:12px">
-        Apagar minhas observações
-      </button>
     </aside>
 
 <section class="map-wrap" aria-label="Mapa de estacionamento">
       <div id="map"></div>
-      <div class="map-label">
-        Azul: local mapeado · Verde: observação pessoal
+      <div class="map-center" aria-hidden="true"></div>
+
+<div class="legend">
+        Azul: mapeado · Verde: livre informada<br>
+        Vermelho: ocupação · Cinza: sem confirmação<br>
+        Círculo central: posição de um novo cadastro
       </div>
     </section>
   </main>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
     "use strict";
 
-const $ = id => document.getElementById(id);
-    const TTL = 5 * 60 * 1000;
-    const STORAGE_KEY = "vaga-cv-observations-v1";
+// =====================================================
+    // 1. CONFIGURAÇÃO
+    // =====================================================
 
-const cities = {
+const SUPABASE_URL = "https://SEU-PROJETO.supabase.co";
+    const SUPABASE_PUBLIC_KEY = "SUA_CHAVE_PUBLICA";
+
+const REFRESH_MS = 10_000;
+    const FREE_FRESH_MS = 2 * 60_000;
+    const OCCUPIED_FRESH_MS = 12 * 60 * 60_000;
+
+const CITIES = {
       valencia: [39.4699, -0.3763],
       alicante: [38.3452, -0.4810],
       castellon: [39.9864, -0.0513],
@@ -288,280 +416,237 @@ const cities = {
       benidorm: [38.5411, -0.1225]
     };
 
-const map = L.map("map").setView(cities.valencia, 15);
+const $ = id => document.getElementById(id);
 
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
+const state = {
+      db: null,
+      ready: false,
+      writing: false,
+      loading: false,
+      refreshAgain: false,
+      searching: false,
+      spaces: [],
+      mapped: [],
+      lastSync: null,
+      syncFailed: false,
+      watchId: null,
+      position: null,
+      firstFix: true
+    };
 
-const parkingLayer = L.layerGroup().addTo(map);
-    const observationLayer = L.layerGroup().addTo(map);
+// =====================================================
+    // 2. MAPA
+    // =====================================================
 
-let mapped = [];
-    let observations = loadObservations();
-    let userPosition = null;
-    let userMarker = null;
+const map = L.map("map").setView(CITIES.valencia, 15);
+
+L.tileLayer(
+      "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        maxZoom: 19,
+        attribution:
+          '© <a href="https://www.openstreetmap.org/copyright">' +
+          'OpenStreetMap</a>'
+      }
+    ).addTo(map);
+
+const mappedLayer = L.layerGroup().addTo(map);
+    const communityLayer = L.layerGroup().addTo(map);
+
+let userMarker = null;
     let accuracyCircle = null;
-    let watchId = null;
-    let firstFix = true;
-    let reportMode = false;
-    let fetching = false;
 
-function notify(message) {
-      $("status").textContent = message;
+$("city").onchange = event => {
+      map.setView(CITIES[event.target.value], 15);
+    };
+
+// =====================================================
+    // 3. FUNÇÕES DE INTERFACE
+    // =====================================================
+
+function element(tag, text, className = "") {
+      const node = document.createElement(tag);
+      if (text !== undefined) node.textContent = text;
+      if (className) node.className = className;
+      return node;
     }
 
-function isValidObservation(item) {
-      return item &&
-        typeof item.id === "string" &&
-        Number.isFinite(item.lat) &&
-        Number.isFinite(item.lng) &&
-        Math.abs(item.lat) <= 90 &&
-        Math.abs(item.lng) <= 180 &&
-        Number.isFinite(item.createdAt) &&
-        item.createdAt <= Date.now() &&
-        Date.now() - item.createdAt < TTL;
+function button(text, handler, disabled = false) {
+      const node = element("button", text);
+      node.type = "button";
+      node.disabled = disabled;
+      node.onclick = handler;
+      return node;
     }
 
-function loadObservations() {
-      try {
-        const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-        return Array.isArray(parsed) ? parsed.filter(isValidObservation) : [];
-      } catch {
-        return [];
-      }
-    }
-
-function saveObservations() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(observations));
-      } catch {
-        notify("Sem acesso ao armazenamento. As observações ficarão apenas nesta sessão.");
-      }
-    }
-
-function distanceTo(point) {
-      const origin = userPosition
-        ? L.latLng(userPosition.lat, userPosition.lng)
+function distance(point) {
+      const origin = state.position
+        ? L.latLng(state.position.lat, state.position.lng)
         : map.getCenter();
-      return origin.distanceTo(L.latLng(point.lat, point.lng));
+
+return origin.distanceTo([point.lat, point.lng]);
     }
 
-function formatDistance(meters) {
-      return meters < 1000
+function distanceLabel(point) {
+      const meters = distance(point);
+      const value = meters < 1000
         ? `${Math.round(meters)} m`
         : `${(meters / 1000).toFixed(1)} km`;
+
+const reference = state.position
+        ? "última posição GPS"
+        : "centro do mapa";
+
+return `${value} da ${reference} · em linha reta`;
     }
 
-function popupContent(title, description) {
-      const box = document.createElement("div");
-      const heading = document.createElement("strong");
-      const text = document.createElement("p");
-      heading.textContent = title;
-      text.textContent = description;
-      box.append(heading, text);
-      return box;
-    }
+function viewPoint(point) {
+      map.setView([point.lat, point.lng], 19);
 
-function makeCard(point, local) {
-      const card = document.createElement("article");
-      card.className = "card";
-
-const badge = document.createElement("span");
-      badge.className = local ? "badge local" : "badge";
-      badge.textContent = local
-        ? "Observação pessoal · não confirmada"
-        : "Mapeado · disponibilidade desconhecida";
-
-const heading = document.createElement("h3");
-      heading.textContent = point.name || "Estacionamento na rua";
-
-const meta = document.createElement("p");
-      const reference = userPosition ? "sua posição" : "centro do mapa";
-      meta.textContent =
-        `${formatDistance(distanceTo(point))} de ${reference} · distância em linha reta`;
-
-const detail = document.createElement("p");
-
-if (local) {
-        const remaining = Math.max(
-          1, Math.ceil((TTL - (Date.now() - point.createdAt)) / 60000)
-        );
-        detail.textContent =
-          `Marcada como livre por você. Expira em até ${remaining} min; pode já ter sido ocupada.`;
-      } else {
-        const fee = point.tags.fee;
-        const payment = fee === "yes"
-          ? "Pago segundo o cadastro."
-          : fee === "no"
-            ? "Sem cobrança segundo o cadastro."
-            : "Cobrança não informada.";
-
-detail.textContent =
-          `${payment} Confira horários, permissões e sinalização.`;
+if (window.innerWidth <= 760) {
+        $("map").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
       }
+    }
 
-const actions = document.createElement("div");
-      actions.className = "card-actions";
-
-const view = document.createElement("button");
-      view.textContent = "Ver no mapa";
-      view.onclick = () => {
-        map.setView([point.lat, point.lng], 18);
-        if (window.innerWidth < 761) {
-          $("map").scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      };
-
-const route = document.createElement("a");
-      route.textContent = "Abrir rota ↗";
-      route.href =
+function routeLink(point) {
+      const link = element("a", "Abrir rota ↗");
+      link.href =
         "https://www.google.com/maps/dir/?api=1&destination=" +
         encodeURIComponent(`${point.lat},${point.lng}`) +
         "&travelmode=driving";
-      route.target = "_blank";
-      route.rel = "noopener noreferrer";
 
-actions.append(view, route);
-      card.append(badge, heading, meta, detail, actions);
-      return card;
+link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      return link;
     }
 
-function render() {
-      parkingLayer.clearLayers();
-      observationLayer.clearLayers();
-      $("results").replaceChildren();
+function addMarker(layer, point, color, title) {
+      L.circleMarker([point.lat, point.lng], {
+        radius: 8,
+        color: "white",
+        weight: 2,
+        fillColor: color,
+        fillOpacity: 1
+      })
+        .bindPopup(element("div", title))
+        .addTo(layer);
+    }
 
-const entries = [
-        ...mapped.map(point => ({ point, local: false })),
-        ...observations.map(point => ({ point, local: true }))
-      ].sort((a, b) => distanceTo(a.point) - distanceTo(b.point));
+// =====================================================
+    // 4. GPS
+    // =====================================================
 
-$("count").textContent = String(entries.length);
+function updateGpsStatus() {
+      if (!state.position) return;
 
-if (!entries.length) {
-        const empty = document.createElement("div");
-        empty.className = "empty";
-        empty.textContent =
-          "Nenhum local para mostrar. Pesquise uma área ou registre uma observação pessoal.";
-        $("results").append(empty);
+const age = Math.max(
+        0,
+        Math.floor(
+          (Date.now() - state.position.timestamp) / 1000
+        )
+      );
+
+$("gpsStatus").textContent =
+        `GPS ${state.watchId === null ? "parado" : "ativo"} · ` +
+        `precisão ±${Math.round(state.position.accuracy)} m · ` +
+        `posição há ${age} s` +
+        (age > 30 ? " · possivelmente desatualizada" : "");
+    }
+
+function stopGps() {
+      if (state.watchId !== null) {
+        navigator.geolocation.clearWatch(state.watchId);
       }
 
-for (const { point, local } of entries) {
-        const description = local
-          ? "Observação apenas deste dispositivo. Não garante disponibilidade."
-          : "Cadastro OpenStreetMap. Ocupação desconhecida.";
+state.watchId = null;
+      $("gpsStart").disabled = false;
+      $("gpsStop").disabled = true;
 
-L.circleMarker([point.lat, point.lng], {
-          radius: local ? 9 : 7,
-          color: "white",
-          weight: 2,
-          fillColor: local ? "#51872c" : "#307bd1",
-          fillOpacity: 1
-        })
-          .bindPopup(popupContent(
-            point.name || "Estacionamento na rua",
-            description
-          ))
-          .addTo(local ? observationLayer : parkingLayer);
-
-$("results").append(makeCard(point, local));
+if (state.position) {
+        updateGpsStatus();
+      } else {
+        $("gpsStatus").textContent = "GPS desligado.";
       }
     }
 
-function updateGpsInfo() {
-      if (!userPosition) {
-        $("gpsInfo").textContent = "GPS desligado ou aguardando posição.";
-        return;
-      }
-
-const age = Math.max(0, Math.floor(
-        (Date.now() - userPosition.timestamp) / 1000
-      ));
-
-$("gpsInfo").textContent =
-        `GPS ${watchId === null ? "parado" : "ativo"} · ` +
-        `precisão estimada ±${Math.round(userPosition.accuracy)} m · ` +
-        `posição recebida há ${age} s` +
-        (age > 30 ? " · posição possivelmente desatualizada" : "");
-    }
-
-function stopTracking() {
-      if (watchId !== null) navigator.geolocation.clearWatch(watchId);
-      watchId = null;
-      $("gps").disabled = false;
-      $("stopGps").disabled = true;
-      updateGpsInfo();
-    }
-
-$("gps").onclick = () => {
+$("gpsStart").onclick = () => {
       if (!window.isSecureContext) {
-        notify("Abra o app em HTTPS ou localhost para usar o GPS.");
+        $("gpsStatus").textContent =
+          "Use HTTPS ou localhost para ativar o GPS.";
         return;
       }
 
 if (!navigator.geolocation) {
-        notify("Este navegador não oferece geolocalização.");
+        $("gpsStatus").textContent =
+          "Geolocalização não suportada neste navegador.";
         return;
       }
 
-if (watchId !== null) return;
+if (state.watchId !== null) return;
 
-firstFix = true;
-      $("gps").disabled = true;
-      $("stopGps").disabled = false;
-      notify("Aguardando sua permissão e a primeira posição do GPS.");
+state.firstFix = true;
+      $("gpsStart").disabled = true;
+      $("gpsStop").disabled = false;
+      $("gpsStatus").textContent = "Aguardando posição e permissão…";
 
-watchId = navigator.geolocation.watchPosition(
+state.watchId = navigator.geolocation.watchPosition(
         position => {
-          const { latitude, longitude, accuracy } = position.coords;
-          userPosition = {
-            lat: latitude,
-            lng: longitude,
-            accuracy,
+          state.position = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            accuracy: position.coords.accuracy,
             timestamp: position.timestamp
           };
 
-const location = [latitude, longitude];
+const coordinates = [
+            state.position.lat,
+            state.position.lng
+          ];
 
 if (!userMarker) {
-            userMarker = L.circleMarker(location, {
+            userMarker = L.circleMarker(coordinates, {
               radius: 8,
               color: "white",
               weight: 3,
               fillColor: "#123d36",
               fillOpacity: 1
-            }).addTo(map).bindPopup("Sua última posição");
+            })
+              .addTo(map)
+              .bindPopup("Sua última posição GPS");
 
-accuracyCircle = L.circle(location, {
-              radius: accuracy,
+accuracyCircle = L.circle(coordinates, {
+              radius: state.position.accuracy,
               color: "#123d36",
               weight: 1,
               fillOpacity: 0.06
             }).addTo(map);
           } else {
-            userMarker.setLatLng(location);
-            accuracyCircle.setLatLng(location).setRadius(accuracy);
+            userMarker.setLatLng(coordinates);
+            accuracyCircle
+              .setLatLng(coordinates)
+              .setRadius(state.position.accuracy);
           }
 
-if (firstFix) {
-            map.setView(location, 16);
-            firstFix = false;
-            notify("GPS ativo. Toque em “Buscar nesta área” para consultar o entorno.");
+if (state.firstFix) {
+            state.firstFix = false;
+            map.setView(coordinates, 16);
           }
 
-updateGpsInfo();
-          render();
+updateGpsStatus();
+          renderMapped();
+          renderCommunity();
         },
         error => {
           if (error.code === 1) {
-            stopTracking();
-            notify("Permissão de localização negada. Você pode explorar o mapa manualmente.");
-          } else if (error.code === 2) {
-            notify("Posição indisponível no momento. O GPS continuará tentando.");
+            stopGps();
+            $("gpsStatus").textContent =
+              "Permissão negada. Explore o mapa manualmente.";
           } else {
-            notify("O GPS demorou a responder. Aguarde ou explore o mapa manualmente.");
+            $("gpsStatus").textContent =
+              "Sem nova posição GPS. Aguarde ou use o mapa.";
           }
         },
         {
@@ -572,23 +657,79 @@ updateGpsInfo();
       );
     };
 
-$("stopGps").onclick = () => {
-      stopTracking();
-      notify("Acompanhamento parado. A última posição permanece no mapa.");
-    };
+$("gpsStop").onclick = stopGps;
+    window.addEventListener("pagehide", stopGps);
 
-$("city").onchange = event => {
-      map.setView(cities[event.target.value], 15);
-      notify("Cidade selecionada. Toque em “Buscar nesta área”.");
-    };
+// =====================================================
+    // 5. OPENSTREETMAP / OVERPASS
+    // =====================================================
 
-async function fetchParking(lat, lng) {
-      // Apenas locais explicitamente classificados como estacionamento
-      // de rua. Não inclui garagens nem estacionamentos genéricos.
-      const query = `
+function renderMapped() {
+      mappedLayer.clearLayers();
+      $("mappedResults").replaceChildren();
+
+const sorted = [...state.mapped]
+        .sort((a, b) => distance(a) - distance(b));
+
+for (const point of sorted) {
+        addMarker(
+          mappedLayer,
+          point,
+          "#307bd1",
+          `${point.name} — disponibilidade desconhecida`
+        );
+
+const card = element("article", undefined, "card");
+        const fee = point.tags.fee;
+
+const payment = fee === "yes"
+          ? "Pago segundo o cadastro."
+          : fee === "no"
+            ? "Sem cobrança segundo o cadastro."
+            : "Cobrança não informada.";
+
+const actions = element("div", undefined, "actions");
+
+actions.append(
+          button("Ver no mapa", () => viewPoint(point)),
+          routeLink(point)
+        );
+
+card.append(
+          element(
+            "span",
+            "Mapeado · ocupação desconhecida",
+            "badge"
+          ),
+          element("h3", point.name),
+          element("p", distanceLabel(point)),
+          element(
+            "p",
+            `${payment} Confira sinalização e restrições.`
+          ),
+          actions
+        );
+
+$("mappedResults").append(card);
+      }
+    }
+
+$("search").onclick = async () => {
+      if (state.searching) return;
+
+state.searching = true;
+      $("search").disabled = true;
+      $("mapStatus").textContent = "Consultando a área…";
+
+state.mapped = [];
+      renderMapped();
+
+const center = map.getCenter();
+
+const query = `
         [out:json][timeout:20];
         (
-          nwr(around:1500,${lat},${lng})
+          nwr(around:1500,${center.lat},${center.lng})
             ["amenity"="parking"]
             ["parking"~"^(street_side|lane)$"]
             ["access"!~"^(private|no)$"];
@@ -605,150 +746,415 @@ try {
           {
             method: "POST",
             headers: {
-              "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+              "Content-Type":
+                "application/x-www-form-urlencoded;charset=UTF-8"
             },
             body: new URLSearchParams({ data: query }),
             signal: controller.signal
           }
         );
 
-if (!response.ok) throw new Error("service");
+if (!response.ok) throw new Error("Consulta indisponível.");
 
 const data = await response.json();
-        if (!Array.isArray(data.elements) || data.remark) {
-          throw new Error("incomplete");
+
+if (!Array.isArray(data.elements) || data.remark) {
+          throw new Error("Consulta incompleta.");
         }
 
-return data.elements.flatMap(element => {
-          const latitude = element.lat ?? element.center?.lat;
-          const longitude = element.lon ?? element.center?.lon;
+state.mapped = data.elements.flatMap(item => {
+          const lat = item.lat ?? item.center?.lat;
+          const lng = item.lon ?? item.center?.lon;
 
-if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
             return [];
           }
 
 return [{
-            id: `${element.type}/${element.id}`,
-            lat: latitude,
-            lng: longitude,
-            name: element.tags?.name || "Estacionamento na rua",
-            tags: element.tags || {}
+            id: `${item.type}/${item.id}`,
+            lat,
+            lng,
+            name: item.tags?.name || "Estacionamento na rua",
+            tags: item.tags || {}
           }];
         });
+
+renderMapped();
+
+$("mapStatus").textContent = state.mapped.length
+          ? `${state.mapped.length} local(is) na área pesquisada. ` +
+            "Não representa o número de vagas livres."
+          : "Nenhum local encontrado. A cobertura pode ser incompleta; " +
+            "isso não significa ausência de vagas.";
+      } catch {
+        $("mapStatus").textContent =
+          "Não foi possível consultar o mapa. " +
+          "Verifique a conexão e tente novamente em instantes.";
       } finally {
         clearTimeout(timer);
+        state.searching = false;
+        $("search").disabled = false;
+      }
+    };
+
+// =====================================================
+    // 6. ESTADOS COLABORATIVOS
+    // =====================================================
+
+function communityPresentation(space) {
+      const age =
+        Date.now() - new Date(space.updated_at).getTime();
+
+const stale =
+        !Number.isFinite(age) ||
+        age < 0 ||
+        (space.status === "livre" && age >= FREE_FRESH_MS) ||
+        (space.status === "ocupada" &&
+          age >= OCCUPIED_FRESH_MS);
+
+const connectionStale =
+        state.syncFailed ||
+        !state.lastSync ||
+        Date.now() - state.lastSync > 30_000;
+
+if (connectionStale) {
+        return {
+          label: "Sem sincronização recente",
+          color: "#7b8580"
+        };
+      }
+
+if (stale) {
+        return {
+          label: "Sem confirmação recente",
+          color: "#7b8580"
+        };
+      }
+
+return space.status === "livre"
+        ? {
+            label: "Livre informada · não garantida",
+            color: "#51872c"
+          }
+        : {
+            label: "Ocupação informada",
+            color: "#c44949"
+          };
+    }
+
+function renderCommunity() {
+      communityLayer.clearLayers();
+      $("communityResults").replaceChildren();
+
+$("registerSpace").disabled =
+        !state.ready || state.writing;
+
+if (!state.spaces.length) {
+        $("communityResults").append(
+          element(
+            "p",
+            "Nenhum ponto colaborativo carregado nesta área.",
+            "muted"
+          )
+        );
+      }
+
+const sorted = [...state.spaces]
+        .sort((a, b) => distance(a) - distance(b));
+
+for (const space of sorted) {
+        const presentation = communityPresentation(space);
+
+addMarker(
+          communityLayer,
+          space,
+          presentation.color,
+          presentation.label
+        );
+
+const card = element("article", undefined, "card");
+        const actions = element("div", undefined, "actions");
+
+actions.append(
+          button("Ver", () => viewPoint(space)),
+          button(
+            "Estacionei",
+            () => reportSpace(space.id, "estacionei"),
+            state.writing
+          ),
+          button(
+            "Saí da vaga",
+            () => reportSpace(space.id, "sai"),
+            state.writing
+          ),
+          routeLink(space)
+        );
+
+card.append(
+          element("span", "Relato da comunidade", "badge"),
+          element("h3", presentation.label),
+          element("p", distanceLabel(space)),
+          element(
+            "p",
+            "Último relato: " +
+            new Date(space.updated_at).toLocaleString("pt-BR")
+          ),
+          actions
+        );
+
+$("communityResults").append(card);
       }
     }
 
-$("search").onclick = async () => {
-      if (fetching) return;
+// =====================================================
+    // 7. CONSULTA COMPARTILHADA
+    // =====================================================
 
-fetching = true;
-      $("search").disabled = true;
-      $("search").textContent = "Consultando mapa…";
+async function refreshCommunity() {
+      if (!state.ready) return;
 
-const center = map.getCenter();
-      mapped = [];
-      render();
-      notify("Consultando cadastros em até 1,5 km do centro atual do mapa.");
+// Evita consultas simultâneas, mas não perde uma
+      // atualização solicitada durante outra consulta.
+      if (state.loading) {
+        state.refreshAgain = true;
+        return;
+      }
+
+state.loading = true;
+
+const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 15000);
 
 try {
-        mapped = await fetchParking(center.lat, center.lng);
-        render();
+        const center = map.getCenter();
 
-notify(mapped.length
-          ? `${mapped.length} local(is) mapeado(s) na área pesquisada. Isso não representa o número de vagas livres.`
-          : "Nenhum estacionamento de rua explicitamente cadastrado nesta área. Isso não significa ausência de vagas: a cobertura pode ser incompleta. Mova o mapa e tente outra área."
+// Retângulo de aproximadamente 3 km por lado.
+        const latDelta = 1.5 / 111.32;
+        const lngDelta = 1.5 / (
+          111.32 * Math.max(
+            0.1,
+            Math.abs(Math.cos(center.lat * Math.PI / 180))
+          )
         );
-      } catch (error) {
-        notify(error.name === "AbortError"
-          ? "A consulta demorou demais. Tente novamente em instantes."
-          : "Não foi possível concluir a consulta. Verifique sua conexão e tente novamente; o serviço público pode limitar acessos."
-        );
+
+const { data, error } = await state.db
+          .from("community_spaces")
+          .select("id, lat, lng, status, updated_at")
+          .gte("lat", center.lat - latDelta)
+          .lte("lat", center.lat + latDelta)
+          .gte("lng", center.lng - lngDelta)
+          .lte("lng", center.lng + lngDelta)
+          .order("updated_at", { ascending: false })
+          .limit(300)
+          .abortSignal(controller.signal);
+
+if (error) throw error;
+
+state.spaces = data || [];
+        state.lastSync = Date.now();
+        state.syncFailed = false;
+
+$("communityStatus").textContent =
+          "Sincronizado às " +
+          new Date(state.lastSync).toLocaleTimeString("pt-BR") +
+          " · atualização a cada 10 s." +
+          (state.spaces.length === 300
+            ? " Limite de 300 pontos atingido; alguns podem não aparecer."
+            : "");
+      } catch {
+        state.syncFailed = true;
+
+$("communityStatus").textContent =
+          "Falha de sincronização. Os dados podem estar desatualizados." +
+          (state.lastSync
+            ? " Último sucesso: " +
+              new Date(state.lastSync).toLocaleTimeString("pt-BR") + "."
+            : "");
       } finally {
-        fetching = false;
-        $("search").disabled = false;
-        $("search").textContent = "Buscar nesta área · 1,5 km";
+        clearTimeout(timer);
+        state.loading = false;
+        renderCommunity();
+
+if (state.refreshAgain) {
+          state.refreshAgain = false;
+
+if (!document.hidden) {
+            void refreshCommunity();
+          }
+        }
       }
-    };
-
-function setReportMode(enabled) {
-      reportMode = enabled;
-      $("report").textContent = enabled
-        ? "Cancelar marcação"
-        : "Marcar vaga livre observada";
-
-$("map").style.cursor = enabled ? "crosshair" : "";
     }
 
-$("report").onclick = () => {
-      setReportMode(!reportMode);
+// =====================================================
+    // 8. REGISTRAR OCUPAÇÃO E SAÍDA
+    // =====================================================
 
-notify(reportMode
-        ? "Somente se estiver parado e tiver visto a vaga: toque no ponto exato do mapa. Não marque garagens, acessos ou locais proibidos."
-        : "Marcação cancelada."
+async function reportSpace(
+      spaceId,
+      action,
+      coordinates = null
+    ) {
+      if (!state.ready || state.writing) return;
+
+const message = action === "estacionei"
+        ? "Você já estacionou neste ponto e está parado? " +
+          "Confirme apenas se o estacionamento for permitido."
+        : "Você desocupou esta vaga? " +
+          "A informação será compartilhada com outros usuários.";
+
+if (!window.confirm(message)) return;
+
+state.writing = true;
+      $("reportStatus").textContent = "Enviando relato…";
+      renderCommunity();
+
+try {
+        const { error } = await state.db.rpc(
+          "report_community_space",
+          {
+            p_space_id: spaceId,
+            p_action: action,
+            p_lat: coordinates?.lat ?? null,
+            p_lng: coordinates?.lng ?? null
+          }
+        );
+
+if (error) throw error;
+
+$("reportStatus").textContent =
+          "Relato salvo. Atualizando a consulta…";
+
+await refreshCommunity();
+      } catch (error) {
+        $("reportStatus").textContent =
+          error.code === "P0001"
+            ? error.message
+            : "Não foi possível confirmar o envio. " +
+              "Confira a sincronização antes de repetir.";
+
+// Uma falha de rede não prova que a escrita falhou.
+        // Reconsulta, mas não repete a alteração automaticamente.
+        void refreshCommunity();
+      } finally {
+        state.writing = false;
+        renderCommunity();
+      }
+    }
+
+$("registerSpace").onclick = () => {
+      if (!state.ready || state.writing) return;
+
+const center = map.getCenter();
+
+const nearby = state.spaces.find(space =>
+        center.distanceTo([space.lat, space.lng]) < 6
       );
 
-if (reportMode && window.innerWidth < 761) {
-        $("map").scrollIntoView({ behavior: "smooth", block: "start" });
+if (nearby) {
+        $("reportStatus").textContent =
+          "Existe um ponto a menos de 6 metros. " +
+          "Confira se é a mesma vaga e use o botão do ponto existente.";
+
+viewPoint(nearby);
+        return;
       }
+
+reportSpace(null, "estacionei", {
+        lat: center.lat,
+        lng: center.lng
+      });
     };
 
-map.on("click", event => {
-      if (!reportMode) return;
+// =====================================================
+    // 9. LOGIN ANÔNIMO E INICIALIZAÇÃO
+    // =====================================================
 
-const confirmed = window.confirm(
-        "Você está parado e acabou de observar uma vaga livre de estacionamento permitido neste ponto? " +
-        "O registro será salvo apenas neste dispositivo por 5 minutos."
-      );
+async function startCommunity() {
+      if (
+        SUPABASE_URL.includes("SEU-PROJETO") ||
+        SUPABASE_PUBLIC_KEY === "SUA_CHAVE_PUBLICA"
+      ) {
+        $("communityStatus").textContent =
+          "Configure a URL e a chave pública do Supabase no HTML.";
+        return;
+      }
 
-if (!confirmed) return;
+if (
+        !SUPABASE_URL.startsWith("https://") ||
+        SUPABASE_PUBLIC_KEY.startsWith("sb_secret_")
+      ) {
+        $("communityStatus").textContent =
+          "Configuração inválida. Use HTTPS e somente uma chave pública.";
+        return;
+      }
 
-observations.push({
-        id: crypto.randomUUID(),
-        lat: event.latlng.lat,
-        lng: event.latlng.lng,
-        name: "Vaga livre observada por você",
-        createdAt: Date.now()
-      });
+try {
+        if (!window.supabase) {
+          throw new Error("Biblioteca Supabase indisponível.");
+        }
 
-setReportMode(false);
-      notify("Observação registrada localmente. Ela não reserva nem garante a vaga.");
-      saveObservations();
-      render();
+state.db = window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_PUBLIC_KEY
+        );
+
+const { data, error } = await state.db.auth.getSession();
+
+if (error) throw error;
+
+if (!data.session) {
+          const result = await state.db.auth.signInAnonymously();
+          if (result.error) throw result.error;
+        }
+
+state.ready = true;
+        renderCommunity();
+        await refreshCommunity();
+      } catch {
+        state.ready = false;
+
+$("communityStatus").textContent =
+          "Não foi possível iniciar o módulo colaborativo. " +
+          "Confira conexão, URL, chave pública e login anônimo. " +
+          "Depois recarregue a página.";
+
+renderCommunity();
+      }
+    }
+
+// =====================================================
+    // 10. EVENTOS E ATUALIZAÇÃO PERIÓDICA
+    // =====================================================
+
+let moveTimer = null;
+
+map.on("moveend", () => {
+      renderMapped();
+      clearTimeout(moveTimer);
+
+moveTimer = setTimeout(() => {
+        if (!document.hidden) void refreshCommunity();
+      }, 350);
     });
 
-$("clear").onclick = () => {
-      if (!observations.length) {
-        notify("Não há observações pessoais para apagar.");
-        return;
-      }
-
-if (!window.confirm("Apagar todas as observações pessoais deste navegador?")) {
-        return;
-      }
-
-observations = [];
-      saveObservations();
-      render();
-      notify("Observações apagadas.");
-    };
-
-map.on("moveend", render);
-
 setInterval(() => {
-      const active = observations.filter(isValidObservation);
-      if (active.length !== observations.length) {
-        observations = active;
-        saveObservations();
+      if (document.hidden) return;
+
+updateGpsStatus();
+      renderCommunity();
+      void refreshCommunity();
+    }, REFRESH_MS);
+
+document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) {
+        updateGpsStatus();
+        renderCommunity();
+        void refreshCommunity();
       }
-      updateGpsInfo();
-      render();
-    }, 15000);
+    });
 
-window.addEventListener("pagehide", stopTracking);
-
-render();
+renderCommunity();
+    void startCommunity();
   </script>
 </body>
 </html>
